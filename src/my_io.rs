@@ -12,22 +12,20 @@ pub fn getln(trim: bool) -> String{
 }
 
 pub fn cls() {
-    print!("{}[2J", 27 as char);
+    print!("{esc}c", esc = 27 as char);
 }
 
-pub fn parse_iter<T>(_iter: T, delim: &str) -> String 
-where T:Iterator,
-T::Item: std::fmt::Display
-{
-    let mut _return: String = String::from("");
-    let len: usize = _iter.size_hint().0;
-    for (i, x) in _iter.enumerate() {
+const ALOT_OF_NEWLINES: &str = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
-        _return += x.to_string().as_str();
-        if i + 1 == len{
-            break;
-        }
-        _return += delim;
-    }
-    return _return;
+pub fn cls_with_new_lines(){
+    print!("{}", ALOT_OF_NEWLINES);
 }
