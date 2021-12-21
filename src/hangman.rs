@@ -2,13 +2,13 @@ use crate::my_io;
 use crate::general;
 use itertools::Itertools;
 
-
 pub fn run(){
     println!("input your word: ");
     let word_to_guess: String = my_io::getln(true);
     my_io::cls_with_new_lines();
     let mut current_guessed_word: Vec<char> = Vec::new();
-
+    // set up the number of guesses, takes the input from console, and handles edge cases
+    println!("number of guesses: ");
     let guess_amount: usize = 
     match my_io::getln_int::<usize>(){
         None => {
@@ -20,9 +20,7 @@ pub fn run(){
         },
         Some(x) => {x}
     };
-
     let mut number_of_guesses: usize = 0;
-
 
     for _char in word_to_guess.chars(){
         current_guessed_word.push('_');
@@ -40,6 +38,7 @@ pub fn run(){
             println!("you have exceeded the maximum allowed guesses, the word was {}", word_to_guess);
             return;
         }
+
         let guess_ch: char = guess.unwrap();
         println!("you guessed: {}", guess_ch);
 
