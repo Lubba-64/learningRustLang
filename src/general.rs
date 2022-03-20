@@ -15,9 +15,9 @@ T::Item: std::fmt::Display
     return result;
 }
 
-pub fn unique_chars_in_str(_str: &str) -> Option<Vec<char>>{
+pub fn unique_chars_in_str(_str: &str) -> Vec<char>{
     if _str.len() == 0 {
-        return None;
+        return Vec::new();
     }
     let mut unique = Vec::new();
     for (_i, x) in _str.chars().enumerate(){
@@ -25,5 +25,5 @@ pub fn unique_chars_in_str(_str: &str) -> Option<Vec<char>>{
             unique.push(x);
         }
     }
-    return Some(unique);
+    return unique;
 }

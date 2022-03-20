@@ -11,13 +11,7 @@ pub fn run(){
     println!("number of guesses: ");
     let guess_amount: usize = 
     match my_io::getln_int::<usize>(){
-        None => {
-            match general::unique_chars_in_str(word_to_guess.as_str())
-            {
-                None => {10}
-                Some(x) => {x.len() + 3}
-            }
-        },
+        None =>{general::unique_chars_in_str(word_to_guess.as_str()).len() + 3}
         Some(x) => {x}
     };
     let mut number_of_guesses: usize = 0;
