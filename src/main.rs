@@ -2,24 +2,42 @@ mod hangman;
 mod sayback;
 pub mod my_io;
 pub mod general;
+use std::*;
 
-const MY_PROGS: [&str; 2] = ["hangman","sayback"];
+struct Module<'a>{
+    name:&'a str,
+    _fn: fn()
+}
 
 fn main(){
-    println!("this is a test application to try and figure out rust as a language.\nhere are some test programs that you can run:");
-    println!("{}", general::parse_iter(MY_PROGS.iter(), "\n"));
-    println!("please select a module: ");
-    let prog = my_io::getln(true).to_lowercase();
-    my_io::cls_with_new_lines();
-    if prog == String::from("hangman") {
-        hangman::run();
-    }
-    else if prog == String::from("sayback") {
-        sayback::run();
+    const STARTING_MODULE:&str = "user_choice";
+    let modules: Vec<Module> = vec![Module{name:"hangman",_fn:hangman::run},Module{name:"sayback",_fn:sayback::run}];
+
+    if STARTING_MODULE == "user_choice" {
+        start_module(choose(&modules).as_str(),&modules)
     }
     else{
-        println!("no module by that name was found.\nrerun the application to run one of the included modules");
+        start_module(STARTING_MODULE, &modules)
     }
-    println!("program has ended, press enter to exit");
-    my_io::getln(false);
+}
+
+fn start_module(module_name:&str, module_options:&Vec<Module>){
+    for module in module_options.into_iter(){
+        if module.name == module_name{
+            (module._fn)();
+            break
+        }
+    }
+}
+
+fn choose(module_options:&Vec<Module>) -> String{
+    println!("this is a test application to try and figure out rust as a language.\nhere are some test programs that you can run:");
+    fn get_name<'a>(x:&'a Module,) -> &'a str{
+        x.name
+    }
+    println!("{}", general::parse_iter(module_options.into_iter().map(get_name).into_iter(), "\n"));
+    println!("please select a module: ");
+    let selected = my_io::getln(true).to_lowercase();
+    my_io::cls_with_new_lines();
+    selected
 }
