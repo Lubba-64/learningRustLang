@@ -1,7 +1,8 @@
-pub fn parse_iter<T>(_iter: T, delim: &str) -> String 
+pub fn concat_iter<T>(_iter: T, delim: &str) -> String 
 where T:Iterator,
 T::Item: std::fmt::Display
 {
+    // concatanates whatever is thrown in as a string and returns it
     let mut result: String = String::from("");
     let len: usize = _iter.size_hint().0;
     for (i, x) in _iter.enumerate() {

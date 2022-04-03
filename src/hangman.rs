@@ -19,7 +19,7 @@ pub fn run(){
     for _char in word_to_guess.chars(){
         current_guessed_word.push('_');
     }
-    println!("currently revealed letters: {}", general::parse_iter(current_guessed_word.iter(),","));
+    println!("currently revealed letters: {}", general::concat_iter(current_guessed_word.iter(),","));
     while current_guessed_word.contains(&'_')
     {
         let guess = my_io::getln_char();
@@ -56,7 +56,7 @@ pub fn run(){
         else{
             number_of_guesses += 1;
         }
-        println!("currently revealed letters: {}", general::parse_iter(current_guessed_word.iter(),","));
+        println!("currently revealed letters: {}", general::concat_iter(current_guessed_word.iter(),","));
     }
     println!("good job! you guessed the word! the word was {}", word_to_guess)
 }

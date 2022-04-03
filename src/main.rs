@@ -2,6 +2,7 @@ mod hangman;
 mod sayback;
 pub mod my_io;
 pub mod general;
+mod cuss;
 use std::*;
 
 struct Module<'a>{
@@ -10,8 +11,12 @@ struct Module<'a>{
 }
 
 fn main(){
-    const STARTING_MODULE:&str = "user_choice";
-    let modules: Vec<Module> = vec![Module{name:"hangman",_fn:hangman::run},Module{name:"sayback",_fn:sayback::run}];
+    const STARTING_MODULE:&str = "cuss";
+    let modules: Vec<Module> = vec![
+        Module{name:"hangman",_fn:hangman::run},
+        Module{name:"sayback",_fn:sayback::run},
+        Module{name:"cuss",_fn:cuss::run}
+        ];
 
     if STARTING_MODULE == "user_choice" {
         start_module(choose(&modules).as_str(),&modules)
@@ -35,7 +40,7 @@ fn choose(module_options:&Vec<Module>) -> String{
     fn get_name<'a>(x:&'a Module,) -> &'a str{
         x.name
     }
-    println!("{}", general::parse_iter(module_options.into_iter().map(get_name).into_iter(), "\n"));
+    println!("{}", general::concat_iter(module_options.into_iter().map(get_name).into_iter(), "\n"));
     println!("please select a module: ");
     let selected = my_io::getln(true).to_lowercase();
     my_io::cls_with_new_lines();
